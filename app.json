@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "Assistive Smart Glove System",
+    "slug": "assistive-smart-glove-system",
+    "scheme": "smartglove",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "backgroundColor": "#F7F8FA"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#F7F8FA"
+      }
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Glove - Hand Scan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&amp;family=Atkinson+Hyperlegible+Next:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes scan-line {
+            0% { transform: translateY(-20%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(120%); opacity: 0; }
+        }
+        .animate-scan {
+            animation: scan-line 3s ease-in-out infinite;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .pulse-glow {
+            box-shadow: 0 0 20px rgba(0, 74, 198, 0.2);
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 0.4; }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed": "#ffdbcd",
+                      "on-surface-variant": "#434655",
+                      "primary": "#004ac6",
+                      "background": "#faf8ff",
+                      "on-tertiary-fixed": "#360f00",
+                      "on-tertiary-container": "#ffede6",
+                      "outline-variant": "#c3c6d7",
+                      "surface-container": "#ededf9",
+                      "on-secondary": "#ffffff",
+                      "tertiary-container": "#bc4800",
+                      "inverse-on-surface": "#f0f0fb",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#003c70",
+                      "outline": "#737686",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-error-container": "#93000a",
+                      "secondary-container": "#64a8fe",
+                      "primary-fixed": "#dbe1ff",
+                      "surface": "#faf8ff",
+                      "secondary": "#0060ac",
+                      "surface-container-high": "#e7e7f3",
+                      "error": "#ba1a1a",
+                      "inverse-surface": "#2e3039",
+                      "on-secondary-fixed-variant": "#004883",
+                      "on-tertiary": "#ffffff",
+                      "surface-container-low": "#f3f3fe",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "surface-container-highest": "#e1e2ed",
+                      "surface-variant": "#e1e2ed",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "on-background": "#191b23",
+                      "on-error": "#ffffff",
+                      "surface-bright": "#faf8ff",
+                      "on-primary-fixed": "#00174b",
+                      "surface-tint": "#0053db",
+                      "on-primary-container": "#eeefff",
+                      "inverse-primary": "#b4c5ff",
+                      "on-surface": "#191b23",
+                      "tertiary": "#943700",
+                      "on-secondary-fixed": "#001c39",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#d4e3ff",
+                      "on-primary": "#ffffff",
+                      "surface-dim": "#d9d9e5",
+                      "secondary-fixed-dim": "#a4c9ff",
+                      "primary-container": "#2563eb"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-margin": "24px",
+                      "touch-target-min": "56px",
+                      "card-padding": "24px",
+                      "unit": "8px",
+                      "gutter": "16px"
+              },
+              "fontFamily": {
+                      "headline-md": ["manrope"],
+                      "body-lg": ["atkinsonHyperlegibleNext"],
+                      "display-lg": ["manrope"],
+                      "headline-sm": ["manrope"],
+                      "body-md": ["atkinsonHyperlegibleNext"],
+                      "label-caps": ["atkinsonHyperlegibleNext"],
+                      "display-lg-mobile": ["manrope"]
+              },
+              "fontSize": {
+                      "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "display-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-sm": ["22px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                      "label-caps": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<!-- Top Navigation -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
+<div class="flex items-center justify-between px-container-margin h-[64px] w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="settings_input_component">settings_input_component</span>
+<h1 class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Smart Glove</h1>
+</div>
+<div class="flex items-center">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-1 mt-[64px] pb-24 md:pb-0 px-container-margin w-full max-w-5xl mx-auto flex flex-col items-center justify-center">
+<!-- Header Section -->
+<section class="text-center mt-12 mb-8 max-w-2xl">
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-4">Scan Your Hand &amp; Wrist</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">
+                Precision is at the heart of therapy. By scanning your hand anatomy, our Smart Glove system creates a custom biomechanical profile to ensure medical-grade pressure distribution and tremor suppression.
+            </p>
+</section>
+<!-- Asymmetric Bento-style Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter w-full items-start mb-12">
+<!-- Left: Info Cards -->
+<div class="md:col-span-4 flex flex-col gap-gutter h-full">
+<div class="glass-card rounded-[24px] p-card-padding shadow-sm border border-white/50 flex items-start gap-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-secondary-container" data-icon="straighten">straighten</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Precision Fit</h4>
+<p class="text-on-surface-variant font-body-md text-body-md">Ensures active sensors align perfectly with your tendons.</p>
+</div>
+</div>
+<div class="glass-card rounded-[24px] p-card-padding shadow-sm border border-white/50 flex items-start gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-fixed-dim flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-primary-fixed-variant" data-icon="analytics">analytics</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Live Metrics</h4>
+<p class="text-on-surface-variant font-body-md text-body-md">Establishes your unique range of motion baseline.</p>
+</div>
+</div>
+<div class="glass-card rounded-[24px] p-card-padding shadow-sm border border-white/50 flex items-start gap-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-fixed flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-on-tertiary-fixed-variant" data-icon="security">security</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-on-surface mb-1">Secure Data</h4>
+<p class="text-on-surface-variant font-body-md text-body-md">Biometric data is encrypted and stored locally on your device.</p>
+</div>
+</div>
+</div>
+<!-- Right: Futuristic Scanner Illustration -->
+<div class="md:col-span-8 relative aspect-square md:aspect-auto md:h-full min-h-[400px] glass-card rounded-[32px] overflow-hidden border border-white/40 flex items-center justify-center">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5"></div>
+<!-- Animated Scanner Visuals -->
+<div class="relative w-3/4 h-3/4 flex items-center justify-center">
+<!-- Scanner Base Glow -->
+<div class="absolute w-full h-full rounded-full bg-primary/5 blur-3xl pulse-glow"></div>
+<!-- SVG Illustration -->
+<div class="relative z-10 w-full h-full">
+<img alt="Hand Scan Visualization" class="w-full h-full object-contain mix-blend-multiply opacity-80" data-alt="A clean, futuristic 3D render of a robotic hand model sitting on a glass scanning platform. The lighting is bright and ethereal, using a light-mode color palette of soft whites and calm primary blues. Subtle blue laser grids are projected onto the hand's surface to represent a biomechanical scan in progress. The mood is clinical, modern, and highly advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCR69v1Slfx_0voTG8RxXBULElXlhpKZ3pJlGnbAeIVJC-yUVjDqBSH2VzNKrMAnffgDyTsE9tP3Nq5--w-6KypPG_awuG4T6j5lRKT-94mapjSjk8sRG70vrrCXKu3aEDgsK56jd79vHGbBiNMpp3Dxb0gkOlYINA0XH3zAntoxt4wFC8Kq_BiQ7gyndbW-oT0AOWPdZYaYSR77qziCWsk6CsN5SbY7Dt_Ocy0S0wTwVoQjlW_18ZgRRVlGGUxzpnVarp7Nbdk-ks"/>
+<!-- Scan Line Overlay -->
+<div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent shadow-[0_0_15px_#004ac6] animate-scan z-20"></div>
+<!-- HUD Elements -->
+<div class="absolute top-4 left-4 p-4 rounded-xl border border-primary/20 bg-white/40 backdrop-blur-md flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-primary uppercase">Sensor Mesh</span>
+<div class="flex gap-1">
+<div class="h-1 w-8 bg-primary rounded-full"></div>
+<div class="h-1 w-4 bg-primary/40 rounded-full"></div>
+<div class="h-1 w-6 bg-primary/20 rounded-full"></div>
+</div>
+</div>
+<div class="absolute bottom-4 right-4 p-4 rounded-xl border border-secondary/20 bg-white/40 backdrop-blur-md flex flex-col items-end gap-1">
+<span class="font-label-caps text-label-caps text-secondary uppercase">Calibration: 88%</span>
+<div class="flex gap-1">
+<div class="h-1 w-12 bg-secondary rounded-full"></div>
+<div class="h-1 w-3 bg-secondary/30 rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Section -->
+<div class="w-full max-w-sm mx-auto mb-16 px-container-margin">
+<button class="group w-full h-[56px] bg-primary text-on-primary rounded-full font-headline-sm text-headline-sm shadow-lg hover:shadow-primary/30 active:scale-95 transition-all duration-200 flex items-center justify-center gap-3">
+<span>Start Scan</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="text-center mt-4 text-label-caps text-on-surface-variant opacity-60">Estimated time: 45 seconds</p>
+</div>
+</main>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface rounded-t-[32px] shadow-[0_-4px_20px_rgba(0,0,0,0.06)]">
+<div class="flex justify-around items-center w-full px-container-margin py-4 min-h-[80px] pb-safe">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-2 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-80 py-2 hover:bg-surface-container-high rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="back_hand">back_hand</span>
+<span class="font-label-caps text-label-caps">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-80 py-2 hover:bg-surface-container-high rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps text-label-caps">Profile</span>
+</a>
+</div>
+</nav>
+<!-- Desktop Navigation Cluster (Simulated for Web consistency) -->
+<div class="hidden md:flex fixed right-8 top-[80px] flex-col gap-4 z-40">
+<div class="glass-card p-2 rounded-full flex flex-col gap-2 shadow-md border border-white/60">
+<button class="w-12 h-12 flex items-center justify-center rounded-full bg-primary text-on-primary shadow-sm active:scale-90 transition-transform">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="back_hand">back_hand</span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+</div>
+<script>
+        // Simple Interaction Feedback
+        document.querySelectorAll('button, a').forEach(el => {
+            el.addEventListener('click', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const ripple = document.createElement('span');
+                ripple.style.position = 'absolute';
+                ripple.style.width = '20px';
+                ripple.style.height = '20px';
+                ripple.style.background = 'rgba(0,0,0,0.1)';
+                ripple.style.borderRadius = '50%';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.transform = 'translate(-50%, -50%) scale(0)';
+                ripple.style.transition = 'transform 0.4s ease-out, opacity 0.4s';
+                ripple.style.pointerEvents = 'none';
+                
+                el.appendChild(ripple);
+                
+                requestAnimationFrame(() => {
+                    ripple.style.transform = 'translate(-50%, -50%) scale(10)';
+                    ripple.style.opacity = '0';
+                });
+                
+                setTimeout(() => ripple.remove(), 400);
+            });
+        });
+    </script>
+</body></html>

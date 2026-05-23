@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Glove - Review Captures</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .pulse-soft {
+            animation: pulse-soft 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-soft {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(0.98); }
+        }
+        body {
+            background-color: #faf8ff;
+            font-family: 'Atkinson Hyperlegible Next', sans-serif;
+            color: #191b23;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-surface-variant": "#434655",
+                        "primary": "#004ac6",
+                        "background": "#faf8ff",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-tertiary-container": "#ffede6",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container": "#ededf9",
+                        "on-secondary": "#ffffff",
+                        "tertiary-container": "#bc4800",
+                        "inverse-on-surface": "#f0f0fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#003c70",
+                        "outline": "#737686",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#64a8fe",
+                        "primary-fixed": "#dbe1ff",
+                        "surface": "#faf8ff",
+                        "secondary": "#0060ac",
+                        "surface-container-high": "#e7e7f3",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2e3039",
+                        "on-secondary-fixed-variant": "#004883",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f3fe",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-container-highest": "#e1e2ed",
+                        "surface-variant": "#e1e2ed",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-background": "#191b23",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#faf8ff",
+                        "on-primary-fixed": "#00174b",
+                        "surface-tint": "#0053db",
+                        "on-primary-container": "#eeefff",
+                        "inverse-primary": "#b4c5ff",
+                        "on-surface": "#191b23",
+                        "tertiary": "#943700",
+                        "on-secondary-fixed": "#001c39",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#d4e3ff",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d9d9e5",
+                        "secondary-fixed-dim": "#a4c9ff",
+                        "primary-container": "#2563eb"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "24px",
+                        "touch-target-min": "56px",
+                        "card-padding": "24px",
+                        "unit": "8px",
+                        "gutter": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["manrope"],
+                        "body-lg": ["atkinsonHyperlegibleNext"],
+                        "display-lg": ["manrope"],
+                        "headline-sm": ["manrope"],
+                        "body-md": ["atkinsonHyperlegibleNext"],
+                        "label-caps": ["atkinsonHyperlegibleNext"],
+                        "display-lg-mobile": ["manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["36px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-sm": ["22px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-caps": ["14px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm dark:shadow-none">
+<div class="flex items-center justify-between px-container-margin h-[64px] w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="settings_input_component">settings_input_component</span>
+<h1 class="font-headline-sm text-headline-sm-mobile md:text-headline-sm text-primary dark:text-primary-fixed-dim tracking-tight font-bold">Smart Glove</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-container-margin max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-8">
+<h2 class="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-2">Review Captures</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Confirm your hand scan steps. Ensure all positions are clearly visible for precise calibration of the assistive sensors.</p>
+</div>
+<!-- Bento Grid of Captures -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Capture Card 1 -->
+<div class="glass-card rounded-[24px] overflow-hidden group shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Open Palm Scan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high-resolution close-up scan of a human hand with an open palm, showing intricate skin texture and biological details. The hand is illuminated by a soft, therapeutic blue light that emphasizes anatomical precision and medical technology. The background is a clean, minimalist medical environment with a clinical, glassmorphic aesthetic using soft whites and cool primary blues. The mood is calm, professional, and technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHO76qInuYYarwRgd5xMotswjXdpEb5ODynY89TyFAzumcHr4_fV3_ORlVYiBZ0-X2aT6E2_yJ4lMtFVkRBKUpgwcQJKXTvl7zOoVnmMYNfR-e9nklB96qEnX8_7-luvvvCl20-OwdZ5GNqY0CkvRAuKB4SvDA67-T_ICv4jwkY3vYFjuCrnihWhvTHel7YG60pkcAvmT30t7Tif6_Zh9nLCSPS2FmHK-JeBva8liRRvstx83dLVzBfmjLMBvxEQc0isswWcshR1c"/>
+<div class="absolute top-4 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+</div>
+<div class="p-card-padding flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Open Palm</h3>
+<p class="font-body-md text-on-surface-variant">Step 1 of 6</p>
+</div>
+<button class="h-touch-target-min px-6 border-2 border-outline-variant rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                        RETAKE
+                    </button>
+</div>
+</div>
+<!-- Capture Card 2 -->
+<div class="glass-card rounded-[24px] overflow-hidden group shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Closed Fist Scan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A focused scan of a closed human fist against a sterile, modern background. The lighting is soft and ambient, casting gentle shadows that define the hand's muscular structure. The scene is dominated by a peaceful primary blue glow, characteristic of advanced assistive medical devices. The image is rendered with a shallow depth of field, highlighting the precision of the smart glove's calibration interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCBiHh8411Jg43aKZkZsL3Lxm59aR6F17i1TmkrxZaDxrcdO0L0pAezt94t0dnUdlbz3YI8cBLGsM7qfiuwVnFoi6mx6cx_LqRbL0NznVh0T7sMu3QMiVG-J0YYGcAfL9YTe98mqlBd-ZVR-_fNVyI7nA93aLj2OPPwRnN1DpUhOJZ6IinFx2--2GsD8vleLvKqhb9xjRuimEDCGvkhuSHSS_jc6Iws6pgj0GWbBd4lU0tVmALl_z989cHwXCIooA6WLXx1L9q4dEk"/>
+<div class="absolute top-4 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+</div>
+<div class="p-card-padding flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Closed Fist</h3>
+<p class="font-body-md text-on-surface-variant">Step 2 of 6</p>
+</div>
+<button class="h-touch-target-min px-6 border-2 border-outline-variant rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                        RETAKE
+                    </button>
+</div>
+</div>
+<!-- Capture Card 3 -->
+<div class="glass-card rounded-[24px] overflow-hidden group shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Pinch Gesture Scan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A precise capture of a human hand performing a pinch gesture, where the thumb and index finger meet. The image is clean and clinical, set against a soft grey and white background with subtle blue gradients. The lighting is diffuse and high-key, creating an atmosphere of safety and technological reliability. The composition is centered and balanced, reflecting the empathetic calm tech design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIJMh8KPRTiglrCdmiQJY2nh60W4pHn7b3DfvZ7YrxDmsh0tRH9Vfomm1NWhhEs98SoGY2efTANlNZAd7o8x-oact4Y-2NR6nrUyiBMdXnt1xJfk6AliaLL2qnRp47nzS87KmTxBTVk_m4_4dhjaflHiOVoJzFLWZiWswbhwRV_-tMTB_OC2n-tJRGvzpkMtZUkfbOWq7WL0zsFnO057SnfIB4KlpFoawYh3_b42lqX6d8BGCSvdNUSxVS_iovar6sqQAARQA53Nw"/>
+<div class="absolute top-4 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+</div>
+<div class="p-card-padding flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Fine Pinch</h3>
+<p class="font-body-md text-on-surface-variant">Step 3 of 6</p>
+</div>
+<button class="h-touch-target-min px-6 border-2 border-outline-variant rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                        RETAKE
+                    </button>
+</div>
+</div>
+<!-- Capture Card 4 -->
+<div class="glass-card rounded-[24px] overflow-hidden group shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Wrist Extension Scan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An anatomical scan showing a hand during a wrist extension movement. The setting is a bright, futuristic clinical lab with soft edges and glassmorphic surfaces. The color palette features whites, light greys, and vibrant primary blue accents. The lighting is extremely soft and even, highlighting the mobility and Range of Motion. The overall mood is encouraging and focused on physical empowerment through assistive technology." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDw8KCl5C2YlWlpQXQxB5HI2FU5yMYzqIOaDiKnz9p39SzI0Y-nzoHiF1H1xjBf_8zmc9_sQA-57LMcou9agBkcimCh_pp6jKjbyT7XvKrMQXAYhxUpCdnDAUbsV_h9h8BSX7cJlP0lVadx4pB9v4gyaVSEmJ_Qdya2JwM7MVy36FQ0nsdhuv_Qt9Z9vUckJ1PydSzspRC0IqPYZ3MSmilrxMGKJzbtidp_OZJPviAP9azGBPuVZErlalVEMGyV8HMUe-gib8FH8oE"/>
+<div class="absolute top-4 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+</div>
+<div class="p-card-padding flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Wrist Up</h3>
+<p class="font-body-md text-on-surface-variant">Step 4 of 6</p>
+</div>
+<button class="h-touch-target-min px-6 border-2 border-outline-variant rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                        RETAKE
+                    </button>
+</div>
+</div>
+<!-- Capture Card 5 -->
+<div class="glass-card rounded-[24px] overflow-hidden group shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Hand Pronation Scan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high-tech digital scan of a hand rotated downwards (pronation). The aesthetic is calm tech, with a focus on medical accuracy and user accessibility. The background is a clean white space with subtle tonal layers and ambient blue shadows. The image captures the fluid motion of the hand, presented as data points within a sleek, modern interface. The mood is serene and technologically sophisticated." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPMNXsAMm7lzvf1BXe68-YzlOOFnuG5EtVGSdgTbs-xsjIhgn8fGWsTywYiYtcpbPV2uyV3VLKNJGCNPbyRs7ehXr9u2eFvJ7mDhqXNN4J38RlEz4m08fHSthURWMLk9imoGouAYKUog9xTgRv27lYFRgb4QX-cqP2cjXL5Qxmh2--YPV7nPrccXYMqRW3JtV45il_R4OKjsWdOlYiyzaim7mSG-eoBnB_bTkSvD3dKrOKWWZD_9mS-aDYhfgWJQd_MZnf2wLJkF0"/>
+<div class="absolute top-4 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+</div>
+<div class="p-card-padding flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Pronation</h3>
+<p class="font-body-md text-on-surface-variant">Step 5 of 6</p>
+</div>
+<button class="h-touch-target-min px-6 border-2 border-outline-variant rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                        RETAKE
+                    </button>
+</div>
+</div>
+<!-- Capture Card 6 -->
+<div class="glass-card rounded-[24px] overflow-hidden group shadow-[0_4px_20px_rgba(0,0,0,0.06)] flex flex-col">
+<div class="relative aspect-video w-full overflow-hidden bg-surface-container">
+<img alt="Dynamic Flexion Scan" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A modern medical visualization of hand flexion, focusing on joint articulation. The style is minimalist and futuristic, utilizing a palette of deep primary blue and pristine white. Soft backdrop blurs and tonal layers create a sense of depth and medical precision. The scene is illuminated by gentle, flicker-free light that emphasizes the reliability of the smart glove calibration process." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmTOu_B4m0ibL7wk9beorKYI5OhlRUn8uTQfVHybNgDExEza0XU0adc_o1W623GNxgEV-01500lsG6rJwetAGwxipNw4VSRwgRkyWM3WMrD0NitZ8K8mwOZ-GYB1isk897LqEtwTGa0bWKENXv7hie_UQ5psPZip0AwecA_1ld349I_1ktjBHIQVVx_OZUVCeiFp0KOvwaZfnTAw1zkmK0DvdGZO7YN803xBcoNPEwkACPHMJcfnDRnk7eMBKEGf4SdfKtX_Co10I"/>
+<div class="absolute top-4 right-4 bg-primary text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg border-2 border-white">
+<span class="material-symbols-outlined" data-icon="check" style="font-variation-settings: 'FILL' 0, 'wght' 700;">check</span>
+</div>
+</div>
+<div class="p-card-padding flex justify-between items-center">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Flexion</h3>
+<p class="font-body-md text-on-surface-variant">Step 6 of 6</p>
+</div>
+<button class="h-touch-target-min px-6 border-2 border-outline-variant rounded-xl font-label-caps text-label-caps text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                        RETAKE
+                    </button>
+</div>
+</div>
+</div>
+<!-- Action Bar (Floating for Focus) -->
+<div class="mt-12 mb-16 flex flex-col md:flex-row gap-4 justify-center items-center">
+<button class="w-full md:w-auto h-touch-target-min px-10 border-2 border-outline rounded-[16px] font-headline-sm text-headline-sm text-on-surface-variant hover:bg-surface-container-high active:scale-95 transition-all">
+                Cancel Session
+            </button>
+<button class="w-full md:w-auto h-touch-target-min px-12 bg-primary text-white rounded-[16px] font-headline-sm text-headline-sm shadow-lg hover:bg-secondary transition-all active:scale-95 flex items-center justify-center gap-2 group">
+                Upload All
+                <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform" data-icon="cloud_upload">cloud_upload</span>
+</button>
+</div>
+</main>
+<!-- Success Feedback Overlay (Hidden by default) -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center bg-background/80 backdrop-blur-sm pointer-events-none opacity-0 transition-opacity duration-300" id="upload-feedback">
+<div class="glass-card p-12 rounded-[32px] text-center shadow-2xl max-w-md">
+<div class="w-24 h-24 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-6 pulse-soft">
+<span class="material-symbols-outlined text-5xl" data-icon="done_all" style="font-variation-settings: 'wght' 700;">done_all</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Syncing Data</h2>
+<p class="font-body-lg text-on-surface-variant">Your hand scan data is being securely processed by the Smart Glove system.</p>
+</div>
+</div>
+<!-- Bottom Nav Bar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[32px] shadow-[0_-4px_20px_rgba(0,0,0,0.06)] bg-surface dark:bg-surface-container-lowest">
+<div class="flex justify-around items-center w-full px-container-margin py-4 min-h-[80px] pb-safe">
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-80 py-2 hover:bg-surface-container-high rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-2 transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" data-icon="back_hand" style="font-variation-settings: 'FILL' 1;">back_hand</span>
+<span class="font-label-caps text-label-caps mt-1">Devices</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant opacity-80 py-2 hover:bg-surface-container-high rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interactions
+        const uploadBtn = document.querySelector('button.bg-primary');
+        const feedbackOverlay = document.getElementById('upload-feedback');
+
+        if (uploadBtn && feedbackOverlay) {
+            uploadBtn.addEventListener('click', () => {
+                feedbackOverlay.classList.remove('pointer-events-none', 'opacity-0');
+                feedbackOverlay.classList.add('opacity-100');
+                
+                // Reset after 3 seconds for demo purposes
+                setTimeout(() => {
+                    feedbackOverlay.classList.add('opacity-0');
+                    setTimeout(() => {
+                        feedbackOverlay.classList.add('pointer-events-none');
+                    }, 300);
+                }, 3000);
+            });
+        }
+
+        // Add subtle hover tracking to glass cards
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>
