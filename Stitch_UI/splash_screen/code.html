@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Smart Glove | Welcome</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Manrope & Atkinson Hyperlegible Next -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Atkinson+Hyperlegible+Next:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdbcd",
+                    "on-surface-variant": "#434655",
+                    "primary": "#004ac6",
+                    "background": "#faf8ff",
+                    "on-tertiary-fixed": "#360f00",
+                    "on-tertiary-container": "#ffede6",
+                    "outline-variant": "#c3c6d7",
+                    "surface-container": "#ededf9",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#bc4800",
+                    "inverse-on-surface": "#f0f0fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#003c70",
+                    "outline": "#737686",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#64a8fe",
+                    "primary-fixed": "#dbe1ff",
+                    "surface": "#faf8ff",
+                    "secondary": "#0060ac",
+                    "surface-container-high": "#e7e7f3",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2e3039",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f3f3fe",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "surface-container-highest": "#e1e2ed",
+                    "surface-variant": "#e1e2ed",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "on-background": "#191b23",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#faf8ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface-tint": "#0053db",
+                    "on-primary-container": "#eeefff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-surface": "#191b23",
+                    "tertiary": "#943700",
+                    "on-secondary-fixed": "#001c39",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#d4e3ff",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d9d9e5",
+                    "secondary-fixed-dim": "#a4c9ff",
+                    "primary-container": "#2563eb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "touch-target-min": "56px",
+                    "card-padding": "24px",
+                    "unit": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["manrope"],
+                    "body-lg": ["atkinsonHyperlegibleNext"],
+                    "display-lg": ["manrope"],
+                    "headline-sm": ["manrope"],
+                    "body-md": ["atkinsonHyperlegibleNext"],
+                    "label-caps": ["atkinsonHyperlegibleNext"],
+                    "display-lg-mobile": ["manrope"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["22px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(0, 74, 198, 0.2)); opacity: 0.8; }
+            50% { filter: drop-shadow(0 0 40px rgba(0, 74, 198, 0.5)); opacity: 1; }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        body {
+            background: radial-gradient(circle at top left, #faf8ff 0%, #d4e3ff 100%);
+            min-height: 100vh;
+            overflow: hidden;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col items-center justify-between py-16 px-container-margin transition-opacity duration-1000 ease-in-out" id="splash-body">
+<!-- Top Branding -->
+<header class="w-full flex justify-center mt-8">
+<div class="flex flex-col items-center space-y-2">
+<div class="w-12 h-12 bg-primary flex items-center justify-center rounded-2xl shadow-lg transition-transform hover:scale-110 active:scale-95 duration-200">
+<span class="material-symbols-outlined text-white text-3xl" data-icon="settings_input_component">settings_input_component</span>
+</div>
+<span class="font-headline-sm text-headline-sm-mobile md:text-headline-sm text-primary font-bold tracking-tight">Smart Glove</span>
+</div>
+</header>
+<!-- Main Content: Floating Illustration -->
+<main class="relative flex flex-col items-center justify-center w-full max-w-lg">
+<!-- Pulse Glow Backdrop -->
+<div class="absolute w-64 h-64 bg-primary-fixed-dim/30 rounded-full blur-[80px] animate-pulse-glow z-0"></div>
+<!-- Illustration Container -->
+<div class="relative z-10 animate-float flex flex-col items-center">
+<div class="relative w-72 h-72 md:w-96 md:h-96">
+<!-- Data-Alt Prompt Embedded Here -->
+<img alt="Assistive Smart Glove Illustration" class="w-full h-full object-contain filter drop-shadow-2xl" data-alt="A futuristic assistive smart glove rendered in a minimalist, clean 3D style. The glove is made of high-tech white synthetic fibers with soft blue glowing sensors at the knuckles and fingertips. It is suspended in a bright, ethereal studio setting with a soft blue and white gradient background that feels medical and advanced. Soft, ambient lighting creates gentle highlights on the glove's surface, conveying a sense of calm tech and compassionate design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaDp0kxZF6-Q00lnm_lYn8NvaSFhjAbYDQSn3C6DDYoVnWN3zutTmgIWS6bmZITS-IpsOLucvMVDdWxGxYoBzthX4ytJJIKiYPHPoWgZe7wDOyQQ9vkU3KNzhdt18XYgA104EC6_qv6h3RwPVLSGIsV5Tso32Zs5kHU2sTl_WUVcF2fkXxt0V-y-La9MlDljGIup6o7YuNJERWagSJFIyFenVII08xhGIaRQDiw1WJx4ZMJ6j6L19KL2QyNM72knEB6Wz3GPcfeSc"/>
+<!-- Floating Sensor Indicators -->
+<div class="absolute top-1/4 -right-4 glass-card p-3 rounded-2xl shadow-xl flex items-center space-gap-2">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant ml-2">Active Calibration</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Text & CTA -->
+<footer class="w-full max-w-md flex flex-col items-center text-center space-y-8 mb-12">
+<div class="space-y-3">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-background">Assistive Smart Glove</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">Empowering independence through technology</p>
+</div>
+<div class="w-full space-y-6">
+<!-- Progress Indicator -->
+<div class="w-full h-1.5 bg-surface-container-highest rounded-full overflow-hidden relative">
+<div class="absolute left-0 top-0 h-full bg-primary rounded-full transition-all duration-[3000ms] ease-out" id="progress-bar" style="width: 0%"></div>
+</div>
+<button class="group relative w-full h-[56px] bg-primary text-white font-headline-sm rounded-full shadow-lg overflow-hidden hover:bg-secondary active:scale-[0.98] transition-all duration-300" onclick="navigate()">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+<span class="relative z-10 flex items-center justify-center space-x-2">
+<span>Initializing System</span>
+<span class="material-symbols-outlined text-white animate-spin" data-icon="sync" style="font-size: 20px;">sync</span>
+</span>
+</button>
+<div class="flex items-center justify-center space-x-6">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary" data-icon="bluetooth_connected" style="font-size: 18px;">bluetooth_connected</span>
+<span class="font-label-caps text-[12px] text-on-surface-variant">Device Ready</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary" data-icon="verified_user" style="font-size: 18px;">verified_user</span>
+<span class="font-label-caps text-[12px] text-on-surface-variant">Medical Certified</span>
+</div>
+</div>
+</div>
+</footer>
+<script>
+        // Simulate initialization progress
+        window.addEventListener('DOMContentLoaded', () => {
+            const bar = document.getElementById('progress-bar');
+            setTimeout(() => {
+                bar.style.width = '100%';
+            }, 100);
+
+            // Subtle mouse tracking glow effect
+            document.addEventListener('mousemove', (e) => {
+                const glow = document.querySelector('.animate-pulse-glow');
+                const x = (e.clientX / window.innerWidth - 0.5) * 40;
+                const y = (e.clientY / window.innerHeight - 0.5) * 40;
+                glow.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        function navigate() {
+            const body = document.getElementById('splash-body');
+            body.style.opacity = '0';
+            setTimeout(() => {
+                // In a real app, this would route to the Home or Onboarding screen
+                console.log('Navigating to Home...');
+                // For demonstration, reset opacity
+                setTimeout(() => body.style.opacity = '1', 500);
+            }, 800);
+        }
+    </script>
+</body></html>

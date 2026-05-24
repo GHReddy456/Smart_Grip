@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&amp;family=Atkinson+Hyperlegible+Next:wght@400;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed": "#ffdbcd",
+                    "on-surface-variant": "#434655",
+                    "primary": "#004ac6",
+                    "background": "#faf8ff",
+                    "on-tertiary-fixed": "#360f00",
+                    "on-tertiary-container": "#ffede6",
+                    "outline-variant": "#c3c6d7",
+                    "surface-container": "#ededf9",
+                    "on-secondary": "#ffffff",
+                    "tertiary-container": "#bc4800",
+                    "inverse-on-surface": "#f0f0fb",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-container": "#003c70",
+                    "outline": "#737686",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-error-container": "#93000a",
+                    "secondary-container": "#64a8fe",
+                    "primary-fixed": "#dbe1ff",
+                    "surface": "#faf8ff",
+                    "secondary": "#0060ac",
+                    "surface-container-high": "#e7e7f3",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2e3039",
+                    "on-secondary-fixed-variant": "#004883",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f3f3fe",
+                    "tertiary-fixed-dim": "#ffb596",
+                    "surface-container-highest": "#e1e2ed",
+                    "surface-variant": "#e1e2ed",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "on-background": "#191b23",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#faf8ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface-tint": "#0053db",
+                    "on-primary-container": "#eeefff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-surface": "#191b23",
+                    "tertiary": "#943700",
+                    "on-secondary-fixed": "#001c39",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#d4e3ff",
+                    "on-primary": "#ffffff",
+                    "surface-dim": "#d9d9e5",
+                    "secondary-fixed-dim": "#a4c9ff",
+                    "primary-container": "#2563eb"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "24px",
+                    "touch-target-min": "56px",
+                    "card-padding": "24px",
+                    "unit": "8px",
+                    "gutter": "16px"
+            },
+            "fontFamily": {
+                    "headline-md": ["manrope"],
+                    "body-lg": ["atkinsonHyperlegibleNext"],
+                    "display-lg": ["manrope"],
+                    "headline-sm": ["manrope"],
+                    "body-md": ["atkinsonHyperlegibleNext"],
+                    "label-caps": ["atkinsonHyperlegibleNext"],
+                    "display-lg-mobile": ["manrope"]
+            },
+            "fontSize": {
+                    "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-sm": ["22px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "label-caps": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .card-selected {
+            border-color: #004ac6 !important;
+            box-shadow: 0 0 20px rgba(0, 74, 198, 0.15);
+            background-color: #eeefff !important;
+        }
+        .check-hidden {
+            display: none;
+        }
+        .card-selected .check-visible {
+            display: flex;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm dark:shadow-none">
+<div class="flex items-center justify-between px-container-margin h-[64px] w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="settings_input_component">settings_input_component</span>
+<h1 class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">Smart Glove</h1>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-high transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-container-margin max-w-2xl mx-auto">
+<!-- Title & Introduction -->
+<section class="mb-10 text-center md:text-left">
+<h2 class="font-display-lg-mobile text-display-lg-mobile md:font-display-lg md:text-display-lg text-on-background mb-4">
+                Select Your Condition
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-md">
+                Customizing your therapy starts here. Choose the condition that best describes your current mobility needs.
+            </p>
+</section>
+<!-- Condition Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter" id="condition-grid">
+<!-- Card: Stroke -->
+<button class="condition-card group relative text-left bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-2 border-transparent transition-all duration-300 hover:shadow-lg active:scale-95 flex flex-col min-h-[180px]" onclick="selectCondition(this)">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="neurology">neurology</span>
+</div>
+<div class="check-visible hidden w-6 h-6 bg-primary rounded-full items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Stroke</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Post-stroke recovery and hemiparesis management.</p>
+<div class="mt-4 overflow-hidden rounded-lg h-16 w-full bg-surface-container-low">
+<img class="w-full h-full object-cover opacity-60" data-alt="A clean, minimalist 3D medical illustration of a human hand with subtle neural pathways glowing in soft blue, emphasizing neurological connection and recovery in a bright, high-key clinical environment with a calm tech aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDSVbnjg-tjJd3R5p9g7plF5pPkQDkPNSYV22Y4N9wJ1i3Wxb49O8PBW58mOUf6x4IPPEiehDR6r0PoZO2fNLksp7FzYZH22BlIqhvxL0piNMZdH8d4WBcUUXHVrb3enOPBb1Isa7C29ZKjjvXPvKPMWyEOrPYW9VFnOzwFszCrd_vLAwEgRkl10m9eRZYwaQEi9y8XoCZaZf4hEuQOSAT150aMmlcum6np7KXutS5C0o3YeudUvVp3ndwxfLbXNcKZ_TkmxTpYtlM"/>
+</div>
+</button>
+<!-- Card: ALS -->
+<button class="condition-card group relative text-left bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-2 border-transparent transition-all duration-300 hover:shadow-lg active:scale-95 flex flex-col min-h-[180px]" onclick="selectCondition(this)">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="potted_plant">potted_plant</span>
+</div>
+<div class="check-visible hidden w-6 h-6 bg-primary rounded-full items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">ALS</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Amyotrophic Lateral Sclerosis support and assistance.</p>
+<div class="mt-4 overflow-hidden rounded-lg h-16 w-full bg-surface-container-low">
+<img class="w-full h-full object-cover opacity-60" data-alt="A sophisticated medical illustration featuring a stylized representation of motor neurons in a soft, airy blue and white palette. The lighting is diffused and modern, conveying a sense of intelligent, assistive technology designed for ALS support." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkkY0Gz_wedJSapKzZzyjIAV68O2nGhwNUtiMqgsG1fdY1cx3i6hizXQrTsRA27ztQoJfzHBRaxDb8XhDoLbw50X5nOgTDBlPzRERAISNyv6rqUVXDNqpI6ieG7fSW9HcexI48RMJWv2ASt-8PH2Q-TgMugQQ6wSkzSXOoxRRdEm2NDyiWdlhgQwXRGVn7Py7jcw9l68WMxHji8o6v8iUOWVWxeXMaa8keMD1_RgJXRhiUdCMZc0k_gNws0q3U9p-SIoXz4Yt_jJc"/>
+</div>
+</button>
+<!-- Card: Spinal Cord Injury -->
+<button class="condition-card group relative text-left bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-2 border-transparent transition-all duration-300 hover:shadow-lg active:scale-95 flex flex-col min-h-[180px]" onclick="selectCondition(this)">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="spine">skeleton</span>
+</div>
+<div class="check-visible hidden w-6 h-6 bg-primary rounded-full items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Spinal Cord Injury</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Mobility restoration for SCI patients.</p>
+<div class="mt-4 overflow-hidden rounded-lg h-16 w-full bg-surface-container-low">
+<img class="w-full h-full object-cover opacity-60" data-alt="A modern medical graphic showing a detailed spinal column with soft, glowing primary blue accents on the vertebrae, set against a pristine off-white background. The visual style is empathetic and high-tech, focusing on restoration and healing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnduy0IZM7kTN3EbvUeECtXn00SQnxdiP5_jLheJhrTK1JGSTdAHXoo_w7sghqan5HeNiShnp4p_NYtxufBicHxN349Mf_HaJ4xcvllfKctJPxz1g7ntp4JSErfO9jkuj6-o8jryzYqKye8aAgecd4zFQfgy96kahyUWrqFIx3wWZXPvcQS3hypLzk6z-hMwdxw-oW5Vd0LzjL-_kGss37k2qxo4LfDNRLsPWf_CMT4KW-01uj6aX1MIxYcYOpW_4nfcduXj_XL8I"/>
+</div>
+</button>
+<!-- Card: Motor Neuron Disorder -->
+<button class="condition-card group relative text-left bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-2 border-transparent transition-all duration-300 hover:shadow-lg active:scale-95 flex flex-col min-h-[180px]" onclick="selectCondition(this)">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="pulsethermometer">thermometer</span>
+</div>
+<div class="check-visible hidden w-6 h-6 bg-primary rounded-full items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Motor Neuron</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">General motor neuron related movement assistance.</p>
+<div class="mt-4 overflow-hidden rounded-lg h-16 w-full bg-surface-container-low">
+<img class="w-full h-full object-cover opacity-60" data-alt="An abstract medical visualization of neural activity represented by soft glowing particles in shades of deep blue and vibrant blue, moving along sleek paths. The environment is minimalist and bright, suggesting a calm, advanced technological solution for mobility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYPJ1sHAqObXIEDFrleuhlI29s4B2hTMQBY-8KFqFLlSVLt4bka7_frBS122M3Ll1UVLiqwYoLtACgiCiI4TtCmxhNrUymocEZ_bJJYbCz9VNL_-MQpSXN0yB89UvhrojLG21OgzHmNVYz3hTahvohBeU0H4X4luAuAt6JRbM3zu1KnbewdPASEFoPvieeMIUSkzDfciYMe1Elce6FgTmOV6IBRrWHOiyk-8Yh8LoB2IElkBRM-wLvBqndD61I9MsGMl6g6eR4R9w"/>
+</div>
+</button>
+<!-- Card: Hand Paralysis -->
+<button class="condition-card group relative text-left bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-2 border-transparent transition-all duration-300 hover:shadow-lg active:scale-95 flex flex-col min-h-[180px]" onclick="selectCondition(this)">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="back_hand">back_hand</span>
+</div>
+<div class="check-visible hidden w-6 h-6 bg-primary rounded-full items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Hand Paralysis</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Targeted assistance for localized hand paralysis.</p>
+<div class="mt-4 overflow-hidden rounded-lg h-16 w-full bg-surface-container-low">
+<img class="w-full h-full object-cover opacity-60" data-alt="A clean, scientific rendering of the human hand anatomy, focusing on tendons and muscle structure, rendered in a glassmorphic style with soft blue highlights. The background is a clean, neutral white, maintaining a professional and empathetic medical aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjCwgWOInp9p8Xnday91TxK8F6R3DnMJ5aSVeMZZ2ednYp6J0oS-JzKnbSHKiuuVDEWeZzNnqe3yTdePOveFPo_bnykxoF4krStnTrrYcj5A-7kBM_4tHyDZRt5Su5GQIMXqjiaH8vHDSQuMSFgnDy8fdYR5R_5lhdnoo3-q_aLDy6LWYNZVjPP2z4CMYa6-JWUw4NgAFKX5Ij815ozTiZ-dBOJKHXmagimNiHbqH0vhOgOiBBy7--xYyaeoC-kWJvAH01luQI56k"/>
+</div>
+</button>
+<!-- Card: Other -->
+<button class="condition-card group relative text-left bg-surface-container-lowest p-card-padding rounded-[24px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-2 border-transparent transition-all duration-300 hover:shadow-lg active:scale-95 flex flex-col min-h-[180px]" onclick="selectCondition(this)">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 bg-primary-container/10 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="help">help</span>
+</div>
+<div class="check-visible hidden w-6 h-6 bg-primary rounded-full items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="check" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Other</h3>
+<p class="font-body-md text-body-md text-on-surface-variant leading-tight">Specify a condition not listed above.</p>
+<div class="mt-4 flex items-center justify-center rounded-lg h-16 w-full bg-surface-container-low border border-dashed border-outline">
+<span class="font-label-caps text-label-caps text-outline">Custom Detail</span>
+</div>
+</button>
+</div>
+<!-- Action Button -->
+<div class="mt-12 flex flex-col gap-4">
+<button class="w-full h-[56px] bg-primary/40 text-white rounded-full font-headline-sm text-headline-sm flex items-center justify-center gap-2 cursor-not-allowed transition-all duration-300" disabled="" id="continue-btn">
+                Continue
+                <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full h-[56px] border-2 border-outline-variant text-on-surface-variant rounded-full font-headline-sm text-headline-sm hover:bg-surface-container transition-all duration-200 active:scale-95">
+                Skip for now
+            </button>
+</div>
+</main>
+<!-- Bottom Nav Suppression for Focus Mode - Replaced by Footer text for accessibility -->
+<footer class="mt-12 mb-8 px-container-margin text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant opacity-60">Step 1 of 4: Profile Setup</p>
+</footer>
+<script>
+        function selectCondition(card) {
+            // Remove selection from all cards
+            document.querySelectorAll('.condition-card').forEach(c => {
+                c.classList.remove('card-selected');
+                c.classList.add('bg-surface-container-lowest');
+            });
+
+            // Add selection to clicked card
+            card.classList.add('card-selected');
+            card.classList.remove('bg-surface-container-lowest');
+
+            // Enable continue button
+            const continueBtn = document.getElementById('continue-btn');
+            continueBtn.disabled = false;
+            continueBtn.classList.remove('bg-primary/40', 'cursor-not-allowed');
+            continueBtn.classList.add('bg-primary', 'shadow-lg', 'shadow-primary/20', 'hover:bg-primary-fixed-variant');
+
+            // Tactile feedback simulated by scale reduction handled by CSS active:scale-95
+        }
+    </script>
+</body></html>

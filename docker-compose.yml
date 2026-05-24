@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: smartgrip
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  cv_service:
+    build:
+      context: ./cv_service
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      # Share the storage directory so CV service can read uploaded frames
+      - ./backend/storage:/app/storage
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@postgres:5432/smartgrip
+      STORAGE_BASE: /app/storage
+      RUST_BACKEND_URL: http://backend:3000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend/storage:/app/storage
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/smartgrip
+      CV_SERVICE_URL: http://cv_service:8001
+    depends_on:
+      postgres:
+        condition: service_healthy
+      cv_service:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  pg_data:

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GloveAssist - Map Gesture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Atkinson+Hyperlegible+Next:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#191b23",
+                        "on-surface-variant": "#434655",
+                        "on-tertiary-container": "#ffede6",
+                        "on-surface": "#191b23",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "inverse-on-surface": "#f0f0fb",
+                        "outline-variant": "#c3c6d7",
+                        "on-primary-fixed": "#00174b",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "inverse-primary": "#b4c5ff",
+                        "surface": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#e1e2ed",
+                        "surface-container-highest": "#e1e2ed",
+                        "inverse-surface": "#2e3039",
+                        "on-secondary-container": "#003c70",
+                        "background": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "surface-dim": "#d9d9e5",
+                        "tertiary-container": "#bc4800",
+                        "tertiary": "#943700",
+                        "surface-bright": "#faf8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "surface-container-high": "#e7e7f3",
+                        "secondary": "#0060ac",
+                        "primary": "#004ac6",
+                        "outline": "#737686",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-secondary-fixed-variant": "#004883",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed": "#001c39",
+                        "secondary-container": "#64a8fe",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#ededf9",
+                        "secondary-fixed": "#d4e3ff",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "primary-fixed": "#dbe1ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f3f3fe",
+                        "secondary-fixed-dim": "#a4c9ff",
+                        "surface-tint": "#0053db"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "gutter": "16px",
+                        "card-padding": "24px",
+                        "touch-target-min": "56px",
+                        "container-margin": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Manrope"],
+                        "display-lg-mobile": ["Manrope"],
+                        "body-lg": ["Atkinson Hyperlegible Next"],
+                        "label-caps": ["Atkinson Hyperlegible Next"],
+                        "body-md": ["Atkinson Hyperlegible Next"],
+                        "display-lg": ["Manrope"],
+                        "headline-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-caps": ["14px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["22px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+        .flow-line {
+            background: linear-gradient(90deg, #2563eb 0%, #64a8fe 50%, #2563eb 100%);
+            background-size: 200% 100%;
+            animation: flowGlow 3s infinite linear;
+        }
+        @keyframes flowGlow {
+            0% { background-position: 100% 0%; }
+            100% { background-position: -100% 0%; }
+        }
+        .active-ring {
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        body {
+            background-color: #faf8ff;
+            color: #191b23;
+            overflow-x: hidden;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md flex justify-between items-center h-14 px-container-margin w-full">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-primary active:scale-95 transition-transform" data-icon="arrow_back">arrow_back</button>
+<h1 class="font-headline-sm text-headline-sm font-bold text-primary">GloveAssist</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="A clean, high-resolution portrait of a friendly-looking middle-aged man with a warm smile, set against a soft, neutral studio background. The lighting is bright and even, reflecting a modern light-mode aesthetic. The visual style is professional and empathetic, reinforcing the calm-tech brand identity of GloveAssist with soft focus and natural skin tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUzB3J07rVvOOK78m7mu_64rpmqLOe8mLd2APFdWiZg4yE4FeEKbN_SwA9lnBUK1E0sZyXzZR8Hr-_vRgCVY_rtKLtAUD09QQqao40v2xV49BDHHzPwFjb1QqnU7YZzwcRx0e9MIFJerJwugWtlkpOkfZkb9M2Bq2CYQvwwsr1Bzu79KFy3Mwu5HLwbkFNLmLb8D1dbI4SvTgqW2Ztn8jGELfbwWjNZ83P-3LvhnXCG_j75LHGBqTaq07tFODoo4RGDCgM3H4KV30"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-32 px-container-margin max-w-lg mx-auto min-h-screen">
+<header class="mb-10 text-center">
+<h2 class="font-display-lg-mobile text-display-lg-mobile text-on-surface mb-2">New Command</h2>
+<p class="text-on-surface-variant font-body-lg">Assign a physical gesture to control your home.</p>
+</header>
+<!-- Mapping Flow Visual -->
+<div class="relative flex flex-col items-center gap-gutter">
+<!-- Connection Line (Vertical Flow for Mobile) -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-1 flow-line opacity-30 z-0"></div>
+<!-- Input Card -->
+<div class="glass-card w-full p-card-padding rounded-[24px] z-10 active:scale-[0.98] transition-transform cursor-pointer">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest">Input Gesture</span>
+<span class="material-symbols-outlined text-primary text-[32px]" data-icon="back_hand" data-weight="fill" style="font-variation-settings: 'FILL' 1;">back_hand</span>
+</div>
+<div class="flex items-center gap-4 py-4 px-4 bg-surface-container-low rounded-xl border-2 border-primary">
+<div class="w-14 h-14 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined text-[32px]" data-icon="pinch">pinch</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Double Pinch</h3>
+<p class="text-on-surface-variant text-body-md">Calibrated: High Precision</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Flow Indicator -->
+<div class="z-20 w-12 h-12 rounded-full bg-primary flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-white text-[28px]" data-icon="sync_alt">sync_alt</span>
+</div>
+<!-- Output Card -->
+<div class="glass-card w-full p-card-padding rounded-[24px] z-10 active:scale-[0.98] transition-transform cursor-pointer">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-caps text-label-caps text-secondary uppercase tracking-widest">Smart Device</span>
+<span class="material-symbols-outlined text-secondary text-[32px]" data-icon="home_iot_device" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home_iot_device</span>
+</div>
+<div class="flex items-center gap-4 py-4 px-4 bg-surface-container-low rounded-xl border border-outline-variant">
+<div class="w-14 h-14 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[32px]" data-icon="lightbulb">lightbulb</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Living Room Lights</h3>
+<p class="text-on-surface-variant text-body-md">3 Devices Connected</p>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Action Selection -->
+<div class="mt-12 space-y-6">
+<div>
+<label class="block font-label-caps text-label-caps text-on-surface-variant mb-3 px-2">Select Action</label>
+<div class="grid grid-cols-2 gap-4">
+<button class="h-touch-target-min rounded-xl border-2 border-primary bg-primary-container/10 flex items-center justify-center gap-2 text-primary font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="power_settings_new">power_settings_new</span>
+                        Turn On/Off
+                    </button>
+<button class="h-touch-target-min rounded-xl border border-outline-variant bg-surface flex items-center justify-center gap-2 text-on-surface-variant font-bold active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="brightness_6">brightness_6</span>
+                        Dim/Brighten
+                    </button>
+</div>
+</div>
+<div class="p-card-padding bg-surface-container-high rounded-3xl">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+<p class="text-body-md text-on-surface-variant">This gesture will toggle the power state of your selected lights when performed with a short pause.</p>
+</div>
+<div class="flex items-center justify-between">
+<span class="font-body-md font-bold text-on-surface">Enable Haptic Feedback</span>
+<div class="w-14 h-8 bg-primary rounded-full relative flex items-center px-1">
+<div class="w-6 h-6 bg-white rounded-full shadow-md ml-auto"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Fixed CTA Area -->
+<div class="fixed bottom-24 left-0 w-full px-container-margin z-40">
+<button class="w-full h-touch-target-min bg-primary text-on-primary rounded-full font-headline-sm flex items-center justify-center gap-2 shadow-xl hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined" data-icon="save">save</span>
+                Save Mapping
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full flex justify-around items-center h-touch-target-min pb-safe px-4 bg-surface-container-low/90 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.06)] rounded-t-xl z-50">
+<div class="flex flex-col items-center justify-center text-on-surface-variant h-12 px-6 hover:bg-surface-variant/50 transition-colors rounded-full cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full h-12 px-6 shadow-md transition-all active:scale-95 cursor-pointer">
+<span class="material-symbols-outlined" data-icon="back_hand" data-weight="fill" style="font-variation-settings: 'FILL' 1;">back_hand</span>
+<span class="font-label-caps text-label-caps mt-1">Devices</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant h-12 px-6 hover:bg-surface-variant/50 transition-colors rounded-full cursor-pointer active:scale-95">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-caps text-label-caps mt-1">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interactions and effects
+        document.querySelectorAll('.active\\:scale-95').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.style.transform = 'scale(0.95)';
+            });
+            button.addEventListener('mouseup', () => {
+                button.style.transform = 'scale(1)';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.transform = 'scale(1)';
+            });
+        });
+
+        // Toggle Switch simulation
+        const toggle = document.querySelector('.bg-primary.rounded-full.relative');
+        if(toggle) {
+            toggle.addEventListener('click', () => {
+                const circle = toggle.querySelector('div');
+                if(circle.classList.contains('ml-auto')) {
+                    circle.classList.remove('ml-auto');
+                    toggle.classList.replace('bg-primary', 'bg-outline-variant');
+                } else {
+                    circle.classList.add('ml-auto');
+                    toggle.classList.replace('bg-outline-variant', 'bg-primary');
+                }
+            });
+        }
+    </script>
+</body></html>

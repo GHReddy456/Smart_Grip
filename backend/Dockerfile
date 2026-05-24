@@ -1,0 +1,24 @@
+FROM rust:1.78-slim as builder
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libssl-dev pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY Cargo.toml Cargo.lock ./
+COPY src ./src
+
+RUN cargo build --release
+
+FROM debian:bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates libssl3 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+COPY --from=builder /app/target/release/assistive-smart-glove-backend .
+
+RUN mkdir -p storage
+
+EXPOSE 3000
+CMD ["./assistive-smart-glove-backend"]
