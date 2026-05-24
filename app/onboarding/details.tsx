@@ -7,6 +7,14 @@ import { useAppTheme } from "../../lib/theme";
 import { useAppStore, type PatientDetails } from "../../store/useAppStore";
 import { GlassCard, PrimaryButton } from "../../components/ui";
 
+const generateUUID = () => {
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+    const r = Math.random() * 16 | 0;
+    const v = c === "x" ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+};
+
 export default function DetailsScreen() {
   const router = useRouter();
   const colors = useAppTheme();
@@ -40,6 +48,7 @@ export default function DetailsScreen() {
   const handleContinue = () => {
     if (isFormValid) {
       setPatientDetails(form as PatientDetails);
+      useAppStore.setState({ patient_id: generateUUID() });
       setOnboardingCompleted(true);
       router.replace("/scans/intro");
     }

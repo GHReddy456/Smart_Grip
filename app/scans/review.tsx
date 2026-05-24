@@ -1,131 +1,271 @@
 import React from "react";
-import { Image, Pressable, ScrollView, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 
 import { useAppTheme } from "../../lib/theme";
 import { useAppStore } from "../../store/useAppStore";
-import { GlassCard, PrimaryButton, SecondaryButton } from "../../components/ui";
 
-const scanReviews = [
-  {
-    id: "wrist",
-    title: "Wrist Profile",
-    step: "Step 1 of 6",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDHO76qInuYYarwRgd5xMotswjXdpEb5ODynY89TyFAzumcHr4_fV3_ORlVYiBZ0-X2aT6E2_yJ4lMtFVkRBKUpgwcQJKXTvl7zOoVnmMYNfR-e9nklB96qEnX8_7-luvvvCl20-OwdZ5GNqY0CkvRAuKB4SvDA67-T_ICv4jwkY3vYFjuCrnihWhvTHel7YG60pkcAvmT30t7Tif6_Zh9nLCSPS2FmHK-JeBva8liRRvstx83dLVzBfmjLMBvxEQc0isswWcshR1c"
-  },
-  {
-    id: "palm-front",
-    title: "Open Palm",
-    step: "Step 2 of 6",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCBiHh8411Jg43aKZkZsL3Lxm59aR6F17i1TmkrxZaDxrcdO0L0pAezt94t0dnUdlbz3YI8cBLGsM7qfiuwVnFoi6mx6cx_LqRbL0NznVh0T7sMu3QMiVG-J0YYGcAfL9YTe98mqlBd-ZVR-_fNVyI7nA93aLj2OPPwRnN1DpUhOJZ6IinFx2--2GsD8vleLvKqhb9xjRuimEDCGvkhuSHSS_jc6Iws6pgj0GWbBd4lU0tVmALl_z989cHwXCIooA6WLXx1L9q4dEk"
-  },
-  {
-    id: "palm-side",
-    title: "Side Profile",
-    step: "Step 3 of 6",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCIJMh8KPRTiglrCdmiQJY2nh60W4pHn7b3DfvZ7YrxDmsh0tRH9Vfomm1NWhhEs98SoGY2efTANlNZAd7o8x-oact4Y-2NR6nrUyiBMdXnt1xJfk6AliaLL2qnRp47nzS87KmTxBTVk_m4_4dhjaflHiOVoJzFLWZiWswbhwRV_-tMTB_OC2n-tJRGvzpkMtZUkfbOWq7WL0zsFnO057SnfIB4KlpFoawYh3_b42lqX6d8BGCSvdNUSxVS_iovar6sqQAARQA53Nw"
-  },
-  {
-    id: "fingers",
-    title: "Extended Fingers",
-    step: "Step 4 of 6",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDw8KCl5C2YlWlpQXQxB5HI2FU5yMYzqIOaDiKnz9p39SzI0Y-nzoHiF1H1xjBf_8zmc9_sQA-57LMcou9agBkcimCh_pp6jKjbyT7XvKrMQXAYhxUpCdnDAUbsV_h9h8BSX7cJlP0lVadx4pB9v4gyaVSEmJ_Qdya2JwM7MVy36FQ0nsdhuv_Qt9Z9vUckJ1PydSzspRC0IqPYZ3MSmilrxMGKJzbtidp_OZJPviAP9azGBPuVZErlalVEMGyV8HMUe-gib8FH8oE"
-  },
-  {
-    id: "fist",
-    title: "Closed Fist",
-    step: "Step 5 of 6",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuBPMNXsAMm7lzvf1BXe68-YzlOOFnuG5EtVGSdgTbs-xsjIhgn8fGWsTywYiYtcpbPV2uyV3VLKNJGCNPbyRs7ehXr9u2eFvJ7mDhqXNN4J38RlEz4m08fHSthURWMLk9imoGouAYKUog9xTgRv27lYFRgb4QX-cqP2cjXL5Qxmh2--YPV7nPrccXYMqRW3JtV45il_R4OKjsWdOlYiyzaim7mSG-eoBnB_bTkSvD3dKrOKWWZD_9mS-aDYhfgWJQd_MZnf2wLJkF0"
-  },
-  {
-    id: "wrist-rotation",
-    title: "Tendon Rotation",
-    step: "Step 6 of 6",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDmTOu_B4m0ibL7wk9beorKYI5OhlRUn8uTQfVHybNgDExEza0XU0adc_o1W623GNxgEV-01500lsG6rJwetAGwxipNw4VSRwgRkyWM3WMrD0NitZ8K8mwOZ-GYB1isk897LqEtwTGa0bWKENXv7hie_UQ5psPZip0AwecA_1ld349I_1ktjBHIQVVx_OZUVCeiFp0KOvwaZfnTAw1zkmK0DvdGZO7YN803xBcoNPEwkACPHMJcfnDRnk7eMBKEGf4SdfKtX_Co10I"
-  }
+const STEP_LABELS: { id: string; title: string }[] = [
+  { id: "wrist",         title: "Wrist Profile"     },
+  { id: "palm-front",   title: "Open Palm"          },
+  { id: "palm-side",    title: "Side Profile"       },
+  { id: "fingers",      title: "Extended Fingers"   },
+  { id: "fist",         title: "Closed Fist"        },
+  { id: "wrist-rotation", title: "Tendon Rotation"  },
+  { id: "thumb",        title: "Thumb Profile"      },
+  { id: "back-hand",    title: "Back of Hand"       },
 ];
 
 export default function ReviewCapturesScreen() {
   const router = useRouter();
   const colors = useAppTheme();
   const gloveHand = useAppStore((state) => state.glove_hand) || "right";
+  // Get the actual captured photos from store
+  const scanCaptures = useAppStore((state) => state.scan_captures) as Record<string, string>;
 
-  const handleUploadAll = () => {
-    router.push("/scans/upload");
-  };
+  const capturedCount = Object.keys(scanCaptures).length;
 
   return (
-    <View style={{ backgroundColor: colors.background }} className="flex-1">
-      {/* Top Header */}
-      <View style={{ borderBottomColor: colors.border }} className="border-b px-6 py-4 flex-row items-center justify-between mt-10">
-        <Pressable onPress={() => router.back()} className="p-2 -ml-2 rounded-full active:bg-black/5">
+    <View style={[styles.root, { backgroundColor: colors.background }]}>
+      {/* Header */}
+      <View style={[styles.header, { borderBottomColor: colors.border }]}>
+        <Pressable style={styles.backBtn} onPress={() => router.back()}>
           <MaterialIcons name="arrow-back" size={24} color={colors.primary} />
         </Pressable>
-        <Text style={{ color: colors.primary }} className="font-display text-[20px] font-bold">
-          Review Scan
-        </Text>
-        <View className="w-10 h-10" />
+        <Text style={[styles.headerTitle, { color: colors.primary }]}>Review Scan</Text>
+        <View style={styles.headerSpacer} />
       </View>
 
-      <ScrollView contentContainerStyle={{ paddingBottom: 40 }} className="flex-1 px-5 pt-6">
-        <View className="mb-6">
-          <Text style={{ color: colors.text }} className="font-display text-[28px] font-semibold tracking-tight">
-            Review Captures
-          </Text>
-          <Text style={{ color: colors.secondaryText }} className="mt-2 font-body text-[15px] leading-5 max-w-sm">
-            Confirm your {gloveHand} hand scan steps. Ensure all positions are clearly visible for precise calibration of the assistive sensors.
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
+        {/* Title block */}
+        <View style={styles.titleBlock}>
+          <Text style={[styles.titleText, { color: colors.text }]}>Review Captures</Text>
+          <Text style={[styles.subtitleText, { color: colors.secondaryText }]}>
+            {capturedCount} of 8 frames captured for your {gloveHand} hand scan.
+            {capturedCount === 8 ? " All frames uploaded successfully." : " Incomplete scan."}
           </Text>
         </View>
 
-        {/* Bento/Grid list of captures */}
-        <View className="gap-5">
-          {scanReviews.map((item) => (
-            <GlassCard key={item.id} colors={colors} className="overflow-hidden p-0 gap-0">
-              <View className="relative h-44 w-full bg-black/10">
-                <Image source={{ uri: item.img }} className="w-full h-full object-cover" />
-                <View style={{ backgroundColor: colors.primary }} className="absolute top-4 right-4 w-9 h-9 rounded-full items-center justify-center border-2 border-white">
-                  <MaterialIcons name="check" size={18} color="#FFFFFF" />
-                </View>
-              </View>
-              <View className="flex-row justify-between items-center p-4">
-                <View>
-                  <Text style={{ color: colors.text }} className="font-display text-[17px] font-bold">
-                    {item.title}
-                  </Text>
-                  <Text style={{ color: colors.secondaryText }} className="font-body text-[13px]">
-                    {item.step}
-                  </Text>
-                </View>
-                <Pressable
-                  onPress={() => router.push("/scans/camera")}
-                  style={{ borderColor: colors.border }}
-                  className="px-4 py-2 border rounded-xl active:bg-black/5"
-                >
-                  <Text style={{ color: colors.text }} className="font-display text-[13px] font-bold">
-                    RETAKE
-                  </Text>
-                </Pressable>
-              </View>
-            </GlassCard>
-          ))}
-        </View>
-
-        {/* Action Buttons */}
-        <View className="mt-8 gap-3">
-          <PrimaryButton
-            colors={colors}
-            title="Upload Scan Data"
-            icon="cloud-upload"
-            onPress={handleUploadAll}
+        {/* Status banner */}
+        <View style={[styles.statusBanner, { backgroundColor: capturedCount === 8 ? "#0d7a3a" : "#7a4d0d" }]}>
+          <MaterialIcons
+            name={capturedCount === 8 ? "check-circle" : "warning"}
+            size={20}
+            color="#fff"
           />
-          <SecondaryButton
-            colors={colors}
-            title="Cancel Session"
+          <Text style={styles.statusText}>
+            {capturedCount === 8
+              ? "✓ Scan complete — ready for measurement extraction"
+              : `${8 - capturedCount} frames missing — please rescan`}
+          </Text>
+        </View>
+
+        {/* Frame cards */}
+        <View style={styles.grid}>
+          {STEP_LABELS.map((step, idx) => {
+            const capturedUri = scanCaptures[step.id];
+            const isCaptured = !!capturedUri;
+
+            return (
+              <View
+                key={step.id}
+                style={[styles.card, { backgroundColor: colors.card, borderColor: isCaptured ? colors.primary : colors.border }]}
+              >
+                {/* Photo */}
+                <View style={styles.imageContainer}>
+                  {isCaptured ? (
+                    <Image
+                      source={{ uri: capturedUri }}
+                      style={styles.photo}
+                      resizeMode="cover"
+                    />
+                  ) : (
+                    <View style={[styles.missingPhoto, { borderColor: colors.border }]}> 
+                      <MaterialIcons name="photo-camera-back" size={34} color={colors.secondaryText} />
+                      <Text style={[styles.missingPhotoText, { color: colors.secondaryText }]}>Capture missing</Text>
+                    </View>
+                  )}
+                  {/* Step number badge */}
+                  <View style={[styles.stepBadge, { backgroundColor: colors.primary }]}>
+                    <Text style={styles.stepBadgeText}>{idx + 1}</Text>
+                  </View>
+                  {/* Captured checkmark */}
+                  {isCaptured && (
+                    <View style={styles.checkBadge}>
+                      <MaterialIcons name="check-circle" size={28} color="#00e676" />
+                    </View>
+                  )}
+                  {/* "YOUR PHOTO" label for actual captures */}
+                  {isCaptured && (
+                    <View style={[styles.yourPhotoLabel, { backgroundColor: colors.primary }]}>
+                      <Text style={styles.yourPhotoText}>YOUR PHOTO</Text>
+                    </View>
+                  )}
+                </View>
+
+                {/* Info row */}
+                <View style={styles.cardFooter}>
+                  <View>
+                    <Text style={[styles.cardTitle, { color: colors.text }]}>{step.title}</Text>
+                    <Text style={[styles.cardSub, { color: isCaptured ? "#00c853" : colors.secondaryText }]}>
+                      {isCaptured ? "Captured & uploaded" : "Not captured"}
+                    </Text>
+                  </View>
+                  <Pressable
+                    onPress={() => router.push("/scans/camera")}
+                    style={[styles.retakeBtn, { borderColor: colors.border }]}
+                  >
+                    <MaterialIcons name="replay" size={14} color={colors.primary} />
+                    <Text style={[styles.retakeText, { color: colors.primary }]}>RETAKE</Text>
+                  </Pressable>
+                </View>
+              </View>
+            );
+          })}
+        </View>
+
+        {/* Action buttons */}
+        <View style={styles.actions}>
+          <Pressable
+            style={[styles.primaryBtn, { backgroundColor: colors.primary }]}
+            onPress={() => router.push("/scans/processing")}
+          >
+            <MaterialIcons name="straighten" size={22} color="#fff" />
+            <Text style={styles.primaryBtnText}>Extract Measurements</Text>
+          </Pressable>
+          <Pressable
+            style={[styles.secondaryBtn, { borderColor: colors.border }]}
             onPress={() => router.replace("/home")}
-          />
+          >
+            <Text style={[styles.secondaryBtnText, { color: colors.text }]}>Back to Home</Text>
+          </Pressable>
         </View>
       </ScrollView>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  root: { flex: 1 },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingTop: 52,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+  },
+  backBtn: { padding: 8, borderRadius: 20 },
+  headerTitle: { fontSize: 20, fontWeight: "700" },
+  headerSpacer: { width: 40 },
+
+  scroll: { padding: 20, paddingBottom: 48, gap: 16 },
+
+  titleBlock: { gap: 6 },
+  titleText: { fontSize: 28, fontWeight: "800" },
+  subtitleText: { fontSize: 15, lineHeight: 22 },
+
+  statusBanner: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    padding: 14,
+    borderRadius: 14,
+  },
+  statusText: { color: "#fff", fontSize: 14, fontWeight: "600", flex: 1 },
+
+  grid: { gap: 16 },
+  card: {
+    borderRadius: 20,
+    overflow: "hidden",
+    borderWidth: 2,
+  },
+  imageContainer: {
+    height: 200,
+    position: "relative",
+    backgroundColor: "#111",
+  },
+  photo: { width: "100%", height: "100%" },
+  missingPhoto: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 8,
+    borderWidth: 1,
+    borderStyle: "dashed",
+  },
+  missingPhotoText: { fontSize: 14, fontWeight: "600" },
+  stepBadge: {
+    position: "absolute",
+    top: 12,
+    left: 12,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  stepBadgeText: { color: "#fff", fontSize: 14, fontWeight: "800" },
+  checkBadge: {
+    position: "absolute",
+    top: 10,
+    right: 10,
+  },
+  yourPhotoLabel: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 6,
+    alignItems: "center",
+  },
+  yourPhotoText: { color: "#fff", fontSize: 11, fontWeight: "700", letterSpacing: 2 },
+
+  cardFooter: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 16,
+  },
+  cardTitle: { fontSize: 16, fontWeight: "700" },
+  cardSub: { fontSize: 13, marginTop: 2 },
+  retakeBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  retakeText: { fontSize: 12, fontWeight: "700" },
+
+  actions: { gap: 12, marginTop: 8 },
+  primaryBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    paddingVertical: 18,
+    borderRadius: 16,
+  },
+  primaryBtnText: { color: "#fff", fontSize: 17, fontWeight: "700" },
+  secondaryBtn: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+  },
+  secondaryBtnText: { fontSize: 16, fontWeight: "600" },
+});

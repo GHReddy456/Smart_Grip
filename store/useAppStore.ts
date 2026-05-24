@@ -62,6 +62,7 @@ type AppStore = {
   hapticsEnabled: boolean;
 
   // Onboarding & Core Database State Model
+  patient_id: string;
   authenticated: boolean;
   role: "patient" | "admin";
   onboarding_completed: boolean;
@@ -77,7 +78,8 @@ type AppStore = {
   patient_details: PatientDetails | null;
 
   // Scan progress
-  scan_captures: Record<string, string>; // stepId -> dummyImageUri
+  scan_captures: Record<string, string>; // stepId -> imageUri
+  current_job_id: string;
 
   // Device & Gesture Management
   gestures: Gesture[];
@@ -109,8 +111,9 @@ type AppStore = {
   setMedicalCondition: (condition: string) => void;
   setGloveHand: (hand: "left" | "right" | "") => void;
   setPatientDetails: (details: PatientDetails) => void;
-  captureScanStep: (stepId: string, mockUri: string) => void;
+  captureScanStep: (stepId: string, uri: string) => void;
   resetScanCaptures: () => void;
+  setCurrentJobId: (jobId: string) => void;
 
   setGloveConnectionState: (state: GloveConnectionState) => void;
   addTrainedGesture: (gesture: Gesture) => void;
@@ -149,6 +152,7 @@ const createAppStore: StateCreator<AppStore> = (set) => ({
   hapticsEnabled: true,
 
   // Onboarding & Core Database State Model
+  patient_id: "",
   authenticated: false,
   role: "patient",
   onboarding_completed: false,
@@ -165,6 +169,7 @@ const createAppStore: StateCreator<AppStore> = (set) => ({
 
   // Scan progress
   scan_captures: {},
+  current_job_id: "",
 
   // Device & Gesture Management
   gestures: defaultGestures,
@@ -204,11 +209,12 @@ const createAppStore: StateCreator<AppStore> = (set) => ({
   setMedicalCondition: (condition) => set({ medical_condition: condition }),
   setGloveHand: (hand) => set({ glove_hand: hand }),
   setPatientDetails: (details) => set({ patient_details: details }),
-  captureScanStep: (stepId, mockUri) => 
-    set((state) => ({ 
-      scan_captures: { ...state.scan_captures, [stepId]: mockUri } 
+  captureScanStep: (stepId, uri) =>
+    set((state) => ({
+      scan_captures: { ...state.scan_captures, [stepId]: uri },
     })),
-  resetScanCaptures: () => set({ scan_captures: {} }),
+  resetScanCaptures: () => set({ scan_captures: {}, current_job_id: "" }),
+  setCurrentJobId: (jobId) => set({ current_job_id: jobId }),
 
   setGloveConnectionState: (state) => set({ glove_connection_state: state }),
   addTrainedGesture: (gesture) => 
@@ -233,6 +239,7 @@ const createAppStore: StateCreator<AppStore> = (set) => ({
     })),
   addSosEvent: (event) => set((state) => ({ sos_events: [event, ...state.sos_events] })),
   resetOnboarding: () => set({
+    patient_id: "",
     onboarding_completed: false,
     scan_completed: false,
     fabrication_status: "Pending Scan",
@@ -243,7 +250,8 @@ const createAppStore: StateCreator<AppStore> = (set) => ({
     glove_hand: "",
     patient_details: null,
     scan_captures: {},
-    glove_connection_state: "Disconnected"
+    current_job_id: "",
+    glove_connection_state: "Disconnected",
   })
 });
 
